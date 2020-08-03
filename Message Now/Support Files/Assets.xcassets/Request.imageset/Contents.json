@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "pngkey.com-linea-punteada-png-4149830.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "pngkey.com-linea-punteada-png-4149829.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "pngkey.com-linea-punteada-png-4149828.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
