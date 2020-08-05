@@ -25,9 +25,10 @@ Message Now is a Swift lightweight framework to build chat applications. It's be
 * Bubble chat.
 * Support light and dark mode.
 * Clean code without MessageKit SDK.
-* Send Voce.
+* Send Voice.
 * Send your location or any else.
 * send media.
+* Seen message
 * Send requests and controll of them.
 * Blocking users.
 * Reset password.
