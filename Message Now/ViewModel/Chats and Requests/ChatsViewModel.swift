@@ -67,11 +67,11 @@ class ChatsViewModel {
         FBNetworkRequest.shared.checkRequestsRecived { [weak self] (requests) in
             guard let self = self else { return }
             self.updateRequestsClouser?()
-            self.initFetchMessages()
+            //self.initFetchMessages()
         }
     }
     
-    private func initFetchMessages() {
+    func initFetchMessages() {
         FBDatabase.shared.loadRecentMessages  { [weak self] (messages) in
             guard let self = self else { return }
             self.isAnimating = false
@@ -105,7 +105,7 @@ class ChatsViewModel {
         var msgs = [RecentMessage]()
         var index = 0
         for var msg in messages {
-            FBDatabase.shared.loadUnreadMessages(id: msg.to!) { [weak self] (count) in
+            FBDatabase.shared.loadUnreadMessagesSingleEvent(id: msg.to!) { [weak self] (count) in
                 guard let self = self else { return }
                 msg.unreadCount = count
                 msgs.append(msg)

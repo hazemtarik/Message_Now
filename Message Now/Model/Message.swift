@@ -9,6 +9,7 @@
 import Foundation
 
 struct Message {
+    var key : String?
     var to: String?
     var text: String?
     var timestamp: Double?

@@ -20,11 +20,11 @@ class FBNetworkRequest {
     private let REQ_REF            = FBAuthentication.shared.ref.child("request_friends")
     private let BLOCK_REF          = FBAuthentication.shared.ref.child("blocked_list")
     
-    public var frinedsList     = [String]()
-    public var requestsSent    = [String]()
-    public var requestsRecived = [String]()
-    public var blockedList     = [String]()
-    public var blockedByList   = [String]()
+    public var frinedsList         = [String]()
+    public var requestsSent        = [String]()
+    public var requestsRecived     = [String]()
+    public var blockedList         = [String]()
+    public var blockedByList       = [String]()
     
     
     

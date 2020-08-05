@@ -27,8 +27,10 @@ class AvailableViewController: UIViewController {
     
     
     @IBAction func switchPressed(_ sender: UISwitch) {
+        let database = FBDatabase.shared
         let status = sender.isOn
         defaults.set(status, forKey: "status")
+        status ? database.updateUserStatus(isOnline: status) : database.updateUserStatus(isOnline: status)
     }
     
     

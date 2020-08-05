@@ -17,6 +17,7 @@ class ChatingViewModel {
     
     
     private var queryStart         : Double?
+    private var unreadMessages     = [String]()
     public  var selectedCell       : MessageViewModel?
     
     
@@ -85,6 +86,12 @@ class ChatingViewModel {
     // MARK:- Fetch Messages
     
     public func fetchMessages(uid: String) {
+        FBDatabase.shared.loadUnreadMessages(id: uid) { [weak self] (keys) in
+            guard let self = self else { return }
+            if keys!.count > 0 {
+                self.unreadMessages.append(contentsOf: keys!)
+            } else { self.checkFriendSeenMessage(uid: uid) }
+        }
         guard !isFetching else { return }
         isFetching = true
         FBDatabase.shared.loadMessages(for: uid, queryStart: queryStart) { [weak self] (newMessages) in
@@ -155,7 +162,8 @@ class ChatingViewModel {
     }
     
     private func proccessFetchMessage(message: Message) -> MessageViewModel {
-        return MessageViewModel(to: message.to, text: message.text, timestamp: message.timestamp, msgKind: message.msgKind, photoURL: message.photoURL, latitude: message.latitude, longitude: message.longitude, voiceURL: message.voiceURL, videoURL: message.videoURL, voiceSec: message.voiceSec)
+        let isSeen = checkSeenMessage(message: message)
+        return MessageViewModel(to: message.to, text: message.text, timestamp: message.timestamp, msgKind: message.msgKind, photoURL: message.photoURL, latitude: message.latitude, longitude: message.longitude, voiceURL: message.voiceURL, videoURL: message.videoURL, voiceSec: message.voiceSec, isSeen: isSeen)
     }
     
     
@@ -164,9 +172,35 @@ class ChatingViewModel {
         selectedCell = messageViewModel[indexpath.row]
     }
     
-    //Read messages
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK:- Handle unread messages
+    
     func readMessages(friendID: String) {
         FBDatabase.shared.readMessages(id: friendID)
+    }
+    
+    private func checkFriendSeenMessage(uid: String) {
+        var newVM = [MessageViewModel]()
+        self.messageViewModel.forEach { (message) in
+            var msg = message
+            msg.isSeen = true
+            newVM.append(msg)
+            if msg.timestamp == self.messageViewModel.last?.timestamp {
+                self.messageViewModel = newVM
+            }
+        }
+    }
+    
+    private func checkSeenMessage(message: Message) -> Bool {
+        let isSeen = unreadMessages.contains(message.key!) ? false : true
+        return isSeen
     }
     
     
@@ -259,15 +293,16 @@ class ChatingViewModel {
 
 struct MessageViewModel {
     
-    var to:        String?
-    var text:      String?
+    var to       : String?
+    var text     : String?
     var timestamp: Double?
-    var msgKind:   String?
-    var photoURL:  String?
-    var latitude:  Double?
+    var msgKind  : String?
+    var photoURL : String?
+    var latitude : Double?
     var longitude: Double?
-    var voiceURL:  String?
-    var videoURL:  String?
-    var voiceSec:  Double?
+    var voiceURL : String?
+    var videoURL : String?
+    var voiceSec : Double?
+    var isSeen   : Bool?
     
 }

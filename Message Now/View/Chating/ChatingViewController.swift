@@ -613,6 +613,7 @@ extension ChatingViewController: UITableViewDelegate, UITableViewDataSource {
         if message.msgKind == database.CheckMessageKind(msgKind: .photo) {
             let photoCell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
             photoCell.photoStack.alignment = message.to == uid ? .trailing: .leading
+            photoCell.checkMessageType(senderID: message.to!, photo: vm.friend_image!)
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoCellPressed(tapGesture:)))
             photoCell.photo.tag = indexPath.row
             photoCell.photo.addGestureRecognizer(tapGesture)
@@ -626,6 +627,7 @@ extension ChatingViewController: UITableViewDelegate, UITableViewDataSource {
         } else if message.msgKind == database.CheckMessageKind(msgKind: .location) {
             let locationCell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
             locationCell.locationStack.alignment = message.to == uid ? .trailing: .leading
+            locationCell.checkMessageType(senderID: message.to!, photo: vm.friend_image!)
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openLocationByMap))
             locationCell.locationImage.addGestureRecognizer(tapGesture)
             locationCell.locationImage.tag = indexPath.row
@@ -638,9 +640,10 @@ extension ChatingViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if message.msgKind == database.CheckMessageKind(msgKind: .voice) {
             let voiceCell = tableView.dequeueReusableCell(withIdentifier: "voiceCell", for: indexPath) as! VoiceTableViewCell
+            voiceCell.checkMessageType(senderID: message.to!)
             if message.to == uid {
                 voiceCell.VoiceStack.alignment = .trailing
-                voiceCell.userImage.image = UIImage(data: UserDefaults.standard.data(forKey: "image")!)
+                voiceCell.userImage.image = currentUser.image!
             } else {
                 voiceCell.VoiceStack.alignment = .leading
                 voiceCell.userImage.image = vm.friend_image

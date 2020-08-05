@@ -16,6 +16,7 @@ class VoiceTableViewCell: UITableViewCell {
         let minuts      = stringFormate(time: Int(msgVM.voiceSec!)/60)
         timeLabel.text  = "\(minuts):\(seconds)"
         timestampLabel.text = msgVM.timestamp?.getMessageTime()
+        seenImage.image   = msgVM.isSeen! ? UIImage(named: "Seen") : UIImage(named: "Unseen")
         }}
     
     
@@ -37,6 +38,7 @@ class VoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var activityIndecator: UIActivityIndicatorView!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var seenImage: UIImageView!
     
     
     
@@ -156,5 +158,17 @@ class VoiceTableViewCell: UITableViewCell {
     private func stringFormate(time: Int)-> String{
         return String(format: "%02d", Int(time) % 60)
     }
+    
+    
+    
+    func checkMessageType(senderID: String) {
+        if senderID != currentUser.id {
+            timeLabel.textAlignment = .right
+            seenImage.isHidden = false
+        } else {
+            seenImage.isHidden = true
+        }
+    }
+    
     
 }

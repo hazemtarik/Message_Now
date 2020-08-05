@@ -15,6 +15,7 @@
 		A133ADD4244D0E9800A19E11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A133ADD2244D0E9800A19E11 /* Main.storyboard */; };
 		A133ADD6244D0E9A00A19E11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A133ADD5244D0E9A00A19E11 /* Assets.xcassets */; };
 		A133ADD9244D0E9A00A19E11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A133ADD7244D0E9A00A19E11 /* LaunchScreen.storyboard */; };
+		A13BB9F6244E79B5000265B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A13BB9F5244E79B5000265B9 /* GoogleService-Info.plist */; };
 		A14DD1B324BB5DD100876F5C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14DD1B224BB5DD100876F5C /* Enums.swift */; };
 		A14DD1B524BB61E100876F5C /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14DD1B424BB61E100876F5C /* PhotoTableViewCell.swift */; };
 		A14DD1B724BB6DEF00876F5C /* System Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14DD1B624BB6DEF00876F5C /* System Authorization.swift */; };
@@ -48,7 +49,6 @@
 		A1B03C1324A0128E00D6E7A3 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B03C1224A0128E00D6E7A3 /* SigninViewController.swift */; };
 		A1B03C1524A0271500D6E7A3 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B03C1424A0271500D6E7A3 /* SignupViewController.swift */; };
 		A1C1958824C9FA1200C6F232 /* EditeProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C1958724C9FA1200C6F232 /* EditeProfileViewModel.swift */; };
-		A1C53CCC24D8050E0067D04F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1C53CCB24D8050E0067D04F /* GoogleService-Info.plist */; };
 		A1C85BE924BFBB8B00AE1DDE /* Message.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1C85BE824BFBB8B00AE1DDE /* Message.mp3 */; };
 		A1C85BEB24BFBC0100AE1DDE /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C85BEA24BFBC0100AE1DDE /* Audio.swift */; };
 		A1CCD57924B3DAEC00C77EF4 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CCD57824B3DAEC00C77EF4 /* ActivityIndicator.swift */; };
@@ -89,6 +89,7 @@
 		A133ADD5244D0E9A00A19E11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A133ADD8244D0E9A00A19E11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A133ADDA244D0E9A00A19E11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A13BB9F5244E79B5000265B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A14DD1B224BB5DD100876F5C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		A14DD1B424BB61E100876F5C /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 		A14DD1B624BB6DEF00876F5C /* System Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "System Authorization.swift"; sourceTree = "<group>"; };
@@ -122,7 +123,6 @@
 		A1B03C1224A0128E00D6E7A3 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		A1B03C1424A0271500D6E7A3 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		A1C1958724C9FA1200C6F232 /* EditeProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditeProfileViewModel.swift; sourceTree = "<group>"; };
-		A1C53CCB24D8050E0067D04F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A1C85BE824BFBB8B00AE1DDE /* Message.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Message.mp3; sourceTree = "<group>"; };
 		A1C85BEA24BFBC0100AE1DDE /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		A1CCD57824B3DAEC00C77EF4 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -260,8 +260,8 @@
 				A133ADCE244D0E9800A19E11 /* SceneDelegate.swift */,
 				A133ADD7244D0E9A00A19E11 /* LaunchScreen.storyboard */,
 				A133ADD5244D0E9A00A19E11 /* Assets.xcassets */,
+				A13BB9F5244E79B5000265B9 /* GoogleService-Info.plist */,
 				A133ADDA244D0E9A00A19E11 /* Info.plist */,
-				A1C53CCB24D8050E0067D04F /* GoogleService-Info.plist */,
 				A1C85BE824BFBB8B00AE1DDE /* Message.mp3 */,
 				A1F7279024C5FA6800989276 /* Cancel.mp3 */,
 				A1C85BEA24BFBC0100AE1DDE /* Audio.swift */,
@@ -484,13 +484,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A133ADD9244D0E9A00A19E11 /* LaunchScreen.storyboard in Resources */,
+				A13BB9F6244E79B5000265B9 /* GoogleService-Info.plist in Resources */,
 				A1C85BE924BFBB8B00AE1DDE /* Message.mp3 in Resources */,
 				A133ADD6244D0E9A00A19E11 /* Assets.xcassets in Resources */,
 				A1E8AC5A2450ED0100F6D1DA /* Settings.storyboard in Resources */,
 				A1E8AC522450E98300F6D1DA /* People.storyboard in Resources */,
 				A1EC244A2452553300039EC3 /* UserCell.xib in Resources */,
 				A1F7279124C5FA6800989276 /* Cancel.mp3 in Resources */,
-				A1C53CCC24D8050E0067D04F /* GoogleService-Info.plist in Resources */,
 				A1E8AC502450E62000F6D1DA /* Chats.storyboard in Resources */,
 				A133ADD4244D0E9800A19E11 /* Main.storyboard in Resources */,
 			);

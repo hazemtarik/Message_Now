@@ -13,6 +13,8 @@ class LocationTableViewCell: UITableViewCell {
     
     var msgVM = MessageViewModel() { didSet {
         setLocationOnMap(latitude: msgVM.latitude!, longitude: msgVM.longitude!)
+        timeLabel.text = msgVM.timestamp?.getMessageTime()
+        seenImage.image   = msgVM.isSeen! ? UIImage(named: "Seen") : UIImage(named: "Unseen")
         }}
     
     let map = MKMapView(frame: .init(x: 0, y: 0, width: 260, height: 280))
@@ -20,6 +22,10 @@ class LocationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var locationStack: UIStackView!
+    @IBOutlet weak var seenImage: UIImageView!
+    @IBOutlet weak var incomingProfile: UIImageView!
+    @IBOutlet weak var outgoingProfile: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
     
     
     
@@ -30,6 +36,8 @@ class LocationTableViewCell: UITableViewCell {
         
         locationImage.isUserInteractionEnabled = true
         locationImage.layer.cornerRadius = 15
+        outgoingProfile.layer.cornerRadius = 12.5
+        incomingProfile.layer.cornerRadius = 10
     }
     
     
@@ -78,5 +86,23 @@ class LocationTableViewCell: UITableViewCell {
         }
     }
     
+    
+    
+    func checkMessageType(senderID: String, photo: UIImage) {
+        if senderID != currentUser.id {
+            outgoingProfile.isHidden = true
+            timeLabel.textAlignment = .right
+            incomingProfile.isHidden = false
+            incomingProfile.image = currentUser.image
+            seenImage.isHidden = false
+        } else {
+            outgoingProfile.isHidden = false
+            timeLabel.textAlignment = .left
+            seenImage.isHidden = true
+            incomingProfile.isHidden = true
+            outgoingProfile.isHidden = false
+            outgoingProfile.image = photo
+        }
+    }
     
 }

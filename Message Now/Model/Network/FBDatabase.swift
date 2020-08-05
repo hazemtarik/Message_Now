@@ -195,7 +195,10 @@ struct FBDatabase {
             recentMessage = ["to": uid, "text": msg, "timestamp": timestamp]
         }
         
-        ref.child("messages").child(uid).child(toUID).childByAutoId().setValue(message) { (error, data) in
+        
+        let SenderRef = ref.child("messages").child(uid).child(toUID).childByAutoId()
+        ref.child("unread").child(toUID).child(uid).updateChildValues([SenderRef.key!: "true"])
+        SenderRef.setValue(message) { (error, data) in
             if error != nil {
                 print(error!)
             } else {
@@ -206,7 +209,6 @@ struct FBDatabase {
             if error != nil {
                 print(error!)
             } else {
-                ref.child("unread").child(toUID).child(uid).updateChildValues([data.key!: "true"])
                 ref.child("recent_message").child(toUID).child(uid).setValue(recentMessage)
             }
         }
@@ -263,7 +265,9 @@ struct FBDatabase {
         let ref = FBAuthentication.shared.ref
         let message: [String: Any] = ["to": toUID, "timestamp": timestamp, "msgKind": CheckMessageKind(msgKind: .location), "latitude": latitude,"longitude": longitude]
         
-        ref.child("messages").child(uid).child(toUID).childByAutoId().setValue(message){ (error, data) in
+        let SenderRef = ref.child("messages").child(uid).child(toUID).childByAutoId()
+        ref.child("unread").child(toUID).child(uid).updateChildValues([SenderRef.key!: "true"])
+        SenderRef.setValue(message){ (error, data) in
             if error != nil {
                 print(error!)
             } else {
@@ -296,6 +300,7 @@ struct FBDatabase {
             let data = snapshot.children.allObjects as! [DataSnapshot]
             for message in data {
                 var messageModel = Message()
+                messageModel.key = message.key
                 messageModel.to = message.childSnapshot(forPath: "to").value as? String
                 messageModel.text = message.childSnapshot(forPath: "text").value as? String
                 messageModel.timestamp = message.childSnapshot(forPath: "timestamp").value as? Double
@@ -319,6 +324,7 @@ struct FBDatabase {
         query.observe(.childAdded) { (snapshot) in
             let values = snapshot.value as! [String: Any]
             var message = Message()
+            message.key = snapshot.key
             message.timestamp = values["timestamp"] as? Double
             message.to = values["to"] as? String
             message.text = values["text"] as? String
@@ -350,9 +356,7 @@ struct FBDatabase {
                         msg.timestamp = message.childSnapshot(forPath: "timestamp").value as? Double
                         messages.append(msg)
                     }
-                    DispatchQueue.main.async {
-                        complation(messages.reversed())
-                    }
+                    complation(messages.reversed())
                 } else { complation(nil) }
             }
         }
@@ -370,7 +374,7 @@ struct FBDatabase {
     
     // MARK:- Messages action
     
-    func loadUnreadMessages(id: String, complation: @escaping(Int?)->()) {
+    func loadUnreadMessagesSingleEvent(id: String, complation: @escaping(Int?)->()) {
         let ref = FBAuthentication.shared.ref
         guard let uid = Auth.auth().currentUser?.uid else { return }
         ref.child("unread").child(uid).child(id).observeSingleEvent(of: .value) { (snapshot) in
@@ -413,7 +417,26 @@ struct FBDatabase {
         ref.child("unread").child(uid).child(id).removeValue()
     }
     
+    func loadUnreadMessages(id: String, complation: @escaping([String]?) -> ()) {
+        let ref = FBAuthentication.shared.ref
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        ref.child("unread").child(id).child(uid).observe(.value) { (snapshot) in
+            var keys = [String]()
+            let messages = snapshot.children.allObjects as! [DataSnapshot]
+            for message in messages {
+                keys.append(message.key)
+            }
+            complation(keys)
+        }
+    }
     
+    func checkFriendReadMessages(id: String, complation: @escaping(Bool) -> ()) {
+        let ref = FBAuthentication.shared.ref
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        ref.child("unread").child(id).child(uid).observe(.childRemoved) { (_) in
+            complation(true)
+        }
+    }
     
     
     

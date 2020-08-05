@@ -36,7 +36,6 @@ class ChatsViewController: UIViewController, PresentChatingDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vm.initFetchRequests()
         badge.layoutIfNeeded()
         tableView.reloadData()
         let image = currentUser.image
@@ -117,6 +116,8 @@ class ChatsViewController: UIViewController, PresentChatingDelegate {
             }
         }
         vm.initFetchUnreadMessages()
+        vm.initFetchRequests()
+        vm.initFetchMessages()
     }
     
     
