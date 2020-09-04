@@ -49,8 +49,52 @@ Message Now is a Swift lightweight framework to build chat applications. It's be
 4. Create your own project in firebase.
 5. Integrate the GoogleService-Info.plist to the support file.
 6. Put the below rules in firebase database realtime:
-    ```json
-    "rules": { "users": { ".indexOn": "username", ".read": "auth.uid != null" , ".write": "auth.uid != null" }, "messages": { ".read": "auth.uid != null" , ".write": "auth.uid != null", "$uid": { "$user_id": { ".indexOn": "timestamp" } } }, "unread": { ".read": "auth.uid != null" , ".write": "auth.uid != null" }, "recent_message": { ".indexOn": "timestamp", ".read": "auth.uid != null" , ".write": "auth.uid != null" }, "request_friends": { ".read": "auth.uid != null" , ".write": "auth.uid != null" }, "friends_list": { ".read": "auth.uid != null" , ".write": "auth.uid != null" }, "typing": { ".read": "auth.uid != null" , ".write": "auth.uid != null" }, "blocked_list": { ".read": "auth.uid != null" , ".write": "auth.uid != null" } } }```
+```json
+    { 
+     "rules": {
+        "users": {
+      ".indexOn": "username",
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null"
+  			},
+      "messages": {
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null",
+        "$uid": {
+          "$user_id": {
+            ".indexOn": "timestamp"
+          }
+        }
+  			},
+          "unread": {
+            ".read": "auth.uid != null" ,
+    				".write": "auth.uid != null"
+				},
+      "recent_message": {
+      ".indexOn": "timestamp",
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null"
+  			},
+      "request_friends": {
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null"
+  			},
+      "friends_list": {
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null"
+  			},
+          "typing": {
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null"
+  			},
+      "blocked_list": {
+      ".read": "auth.uid != null" ,
+    	".write": "auth.uid != null"
+  			}
+  	    }
+    }
+```
+    
 
 # Contacts
 
