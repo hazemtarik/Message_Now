@@ -89,6 +89,9 @@ class SignupViewController: UIViewController {
         vm.signUpPressed(firstName: firstTextField.text!, lasName: lastTextfield.text!, username: usernameTextField.text!, withEmail: emailTextfield.text!, password: passwordTextfield.text!, profileImage: profileImage.currentImage!)
     }
     
+    @IBAction func alreadyHaveAccountButton(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func profileImagePressed(_ sender: Any) {
         SystemAuthorization.shared.photoAuthorization { [weak self] (isAuth, message) in
@@ -146,6 +149,8 @@ class SignupViewController: UIViewController {
         tapGesture.addTarget(self, action: #selector(dismissKeyboard))
         
         activityIndicator.stopAnimating()
+        
+        self.haveAccountButton.addTarget(self, action: #selector(self.alreadyHaveAccountButton(_:)), for: .touchUpInside)
         
     }
     
