@@ -395,6 +395,9 @@
                                                 <state key="normal" title="Already have an account">
                                                     <color key="titleColor" white="0.33333000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="haveAccountPressed:" destination="Ccc-wc-AzM" eventType="touchUpInside" id="IPZ-Kt-doo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

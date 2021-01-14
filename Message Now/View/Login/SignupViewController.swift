@@ -90,6 +90,10 @@ class SignupViewController: UIViewController {
     }
     
     
+    @IBAction func haveAccountPressed(_ sender: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     @IBAction func profileImagePressed(_ sender: Any) {
         SystemAuthorization.shared.photoAuthorization { [weak self] (isAuth, message) in
             guard let self = self else { return }
